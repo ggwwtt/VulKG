@@ -355,7 +355,8 @@ MATCH (v:Vulnerability{cveID:cveID})-[r:AFFECTS]->(p:Product{productName:product
 	SET r.affectedVersion = r.affectedVersion + [version]
  RETURN count(*)",
  {batchSize: 500}
-); //return: 1126644
+);
+//return: 1126644
 
 
 //###################### add index for fast seaching ############################
@@ -388,7 +389,8 @@ RETURN n.cveID, n.description;  //8950 records
 MATCH (n:Vulnerability)
 WHERE n.description STARTS WITH '** REJECT **'
 DETACH DELETE n
-RETURN count(*); //Deleted 8950 nodes, deleted 191 relationships
+RETURN count(*);
+//Deleted 8950 nodes, deleted 191 relationships
 
 //################ add new properties to Vulnerability ############################
 // property name: exploitability, exploitDate
@@ -401,23 +403,27 @@ RETURN COUNT(*); // 148609
 // set exploitability and exploitDate based on EXPLOITS relationships
 MATCH (v1:Vulnerability)<-[r:EXPLOITS]-(e:Exploit)
 SET v1.exploitability=1, v1.exploitDate=v1.exploitDate + [e.exploitPublishDate]
-RETURN COUNT(*); // 28791, Set 57582 properties
+RETURN COUNT(*); 
+// 28791, Set 57582 properties
 
 // ############### explore exploitable vulnerabilities #######################
 // return number of exploitable vulnerabilities
 MATCH (v1:Vulnerability)
 WHERE v1.exploitability=1
-RETURN COUNT(*); // 23660
+RETURN COUNT(*);
+// 23660
 
 // Return number of vulnerabilities having only 1 exploit
 MATCH (v1:Vulnerability)
 WHERE size(v1.exploitDate)=1
-RETURN COUNT(*); //20689
+RETURN COUNT(*); 
+//20689
 
 // Return number of vulnerabilities having more than 1 exploit
 MATCH (v1:Vulnerability)
 WHERE size(v1.exploitDate)>1
-RETURN COUNT(*); //2971
+RETURN COUNT(*); 
+//2971
 
 // ############## generate fig 1
 CALL db.schema.visualization()
@@ -436,4 +442,5 @@ MATCH p=()-[r:AFFECTS]->() RETURN count(p); //212654
 MATCH p=()-[r:BELONGS_TO]->() RETURN count(p); //47509
 MATCH p=()-[r:EXAMPLE_OF]->() RETURN count(p); //71031
 MATCH p=()-[r:WRITES]->() RETURN count(p); //43743
-MATCH p=()-[r:REFERS_TO]->() RETURN count(p); //429728
+MATCH p=()-[r:REFERS_TO]->() RETURN count(p); 
+//429728
