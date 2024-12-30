@@ -73,7 +73,7 @@ This section introduces how to implement the use case: Vulnerability Co-exploita
 Python and Cypher
 
 ### 3.2 Library
-numpy==1.22.4
+numpy==1.22.4  该版本需要python 3.10或3.9
 
 scikit-learn==1.1.1
 
@@ -102,7 +102,7 @@ This subsection introduces how to generate a raw version and a ready-to-go versi
 Python and Cypher
 
 #### 3.5.2 Library
-py2neo==2021.2.3
+py2neo==2021.2.3    pip没有这个版本，有2021.2.4版
 
 pandas==1.4.2
 
